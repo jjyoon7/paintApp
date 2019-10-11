@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Name() {
+    const [name, setName] = useState('')
     return (
-        <label>
+        <label className="header-name">
             <input />
         </label>
     )
