@@ -4,7 +4,12 @@ export default function Name() {
     const [name, setName] = useState('')
     return (
         <label className="header-name">
-            <input />
+            <input 
+                value={name}
+                onChange={}
+                onClick={}
+                placeholder="Untitled masterpiece"
+            />
         </label>
     )
 }
