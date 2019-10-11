@@ -21,6 +21,7 @@
   "homepage": "https://github.com/jjyoon7/paintApp#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "js-pack": "^1.2.1",
     "react": "^16.10.2"
   }
 }
