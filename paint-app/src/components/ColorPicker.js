@@ -3,6 +3,7 @@ import randomColor from 'randomcolor'
 
 export default function ColorPicker({ colors=[], activeColor, setActiveColor}) {
     if(!colors.length) return null
+    console.log("colorpicker function is being called")
     return (
         <fieldset className="color-picker">
             {colors.map((color, i) => (
