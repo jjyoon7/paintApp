@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import randomColor from 'randomcolor'
 
 export default function ColorPicker({ colors=[], activeColor, setActiveColor}) {
