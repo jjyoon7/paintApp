@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import randomColor from 'randomcolor'
+import React from 'react'
 
-export default function ColorPicker({ colors=[], activeColor, setActiveColor}) {
-    if(!colors.length) return null
-    console.log("colorpicker function is being called")
-    return (
+export default function ColorPicker({ colors = [], activeColor, setActiveColor}) {
+    if (!colors.length) return null
+    return  (
         <fieldset className="color-picker">
             {colors.map((color, i) => (
                 <label key={i}>
@@ -15,7 +13,7 @@ export default function ColorPicker({ colors=[], activeColor, setActiveColor}) {
                         checked={activeColor === color}
                         onChange={() => setActiveColor(color)}
                     />
-                    <span stype={{background: color}}/>
+                    <span style={{ background: color }}/>
                 </label>
             ))}
         </fieldset>
