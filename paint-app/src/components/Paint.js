@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Name from './Name'
 import randomColor from 'randomcolor'
+import Canvas from './Canvas'
+import WindowSize from './WindowSize'
 import ColorPicker from './ColorPicker'
 
 export default function Paint() {

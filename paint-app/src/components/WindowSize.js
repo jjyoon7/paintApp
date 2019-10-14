@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 export default function WindowResize() {
     const [[windowWidth, windowHeight], setWindowSize] = useState([window.innerWidth, window.innerHeight])
     const [visible, setVisible] = useState(false)
@@ -13,4 +14,9 @@ export default function WindowResize() {
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
     }, [])
+    render (
+        <div className={ `window-size ${visible ? '' : 'hidden'}` }>
+            {windowWidth}x{windowHeight}
+        </div>
+    )
 }
