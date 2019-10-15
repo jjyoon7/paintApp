@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Name from './Name'
 import randomColor from 'randomcolor'
 import Canvas from './Canvas'
 import WindowSize from './WindowSize'
 import ColorPicker from './ColorPicker'
+import RefreshButton from './RefreshButton'
 
 export default function Paint() {
     const [colors, setColors] = useState([])
     const [activeColor, setActiveColor] = useState(null)
     const headerRef = useRef({offsetHeight: 0})
-    const getColors = () => {
+    const getColors = useCallback(() => {
         // get the random colors in array but copying and choose the first on in the origianl array by slice(1) function
         const baseColor = randomColor().slice(1);
         // chose that one color and scheme mode quad is generating different colors based on it
@@ -19,7 +20,7 @@ export default function Paint() {
             setColors(res.colors.map(color => color.hex.value))
             setActiveColor(res.colors[0].hex.value)
         })
-    }
+    })
 
     useEffect(getColors, [])
     return (
@@ -34,6 +35,7 @@ export default function Paint() {
                         activeColor={activeColor}
                         setActiveColor={setActiveColor}
                     />
+                    <RefreshButton cb={getColors}/>
                 </div>
             </header>
             {activeColor && (
