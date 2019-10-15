@@ -6,7 +6,7 @@ export default function WindowSize() {
   useEffect(() => {
     let timeoutId
     const handleResize = () => {
-        console.log("resize being called") 
+      console.log("resize being called") 
       setWindowSize([window.innerWidth, window.innerHeight])
       setVisible(true)
       clearTimeout(timeoutId)
