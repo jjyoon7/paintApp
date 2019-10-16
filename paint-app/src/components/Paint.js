@@ -13,8 +13,8 @@ export default function Paint() {
     let timeoutId = useRef()
     const [windowWidth, windowHeight] = useWindowSize(() => {
         setVisible(true)
-        clearTimeout(timeoutId)
-        timeoutId = setTimeout(() => setVisible(false), 500)
+        clearTimeout(timeoutId.current)
+        timeoutId.current = setTimeout(() => setVisible(false), 500)
     })
     const headerRef = useRef({offsetHeight: 0})
     const getColors = useCallback(() => {
