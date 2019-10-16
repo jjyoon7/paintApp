@@ -1,25 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import useWindowSize from './WindowSize'
 
-export default class Canvas extends React.Component {
+export default function Canvas() {
   constructor(props) {
     super(props)
-    this.canvasRef = React.createRef()
     this.handleMouseMove = this.handleMouseMove.bind(this)
-    this.handleResize = this.handleResize.bind(this)
     this.startDrawing = this.startDrawing.bind(this)
     this.stopDrawing = this.stopDrawing.bind(this)
-    this.state = {
-      drawing: false,
-      width: window.innerWidth
-    }
   }
-  componentDidMount() {
+
+  const [drawing, setDrawing] = useState(false)
+  const [windowWidth, windowHeight] = useWindowSize()
+  const [width, setWidth] = useState(windowWidth)
+  const canvasRef = useRef()
+
+  useEffect(() => {
     this.ctx = this.canvasRef.current.getContext('2d')
     window.addEventListener('resize', this.handleResize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
-  }
+  }, [])
+ 
   handleMouseMove(e) {
     // actual coordinates
     const coords = [
@@ -34,10 +33,8 @@ export default class Canvas extends React.Component {
         this.props.handleMouseMove(...coords)
     }
   }
-  handleResize() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight })
-  }
-  startDrawing(e) {
+  
+  React.memo((startDrawing(e) {
     this.ctx.lineJoin = 'round'
     this.ctx.lineCap = 'round'
     this.ctx.lineWidth = 10
@@ -53,14 +50,14 @@ export default class Canvas extends React.Component {
   stopDrawing() {
     this.ctx.closePath()
     this.setState({ drawing: false })
-  }
-  render() {
+  }))
+  
     return (
       <React.Fragment>
         <canvas
-          ref={this.canvasRef}
-          width={this.props.width || this.state.width}
-          height={this.props.height || this.state.height}
+          ref={canvasRef}
+          width={windowWidth}
+          height={windowHeight}
           onMouseDown={this.startDrawing}
           onMouseUp={this.stopDrawing}
           onMouseOut={this.stopDrawing}
@@ -69,4 +66,3 @@ export default class Canvas extends React.Component {
       </React.Fragment>
     )
   }
-}
